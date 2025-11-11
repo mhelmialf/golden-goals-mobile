@@ -5,129 +5,92 @@
 #### NPM       : 2406402416
 #### Class     : PBP D
 
-## Tugas 7 - PBP 2025/2026
-
-## 🌳 Widget Tree dan Hubungan Parent-Child
-
-**Widget Tree (Pohon Widget)**
-Widget Tree adalah struktur hierarki yang menggambarkan bagaimana seluruh antarmuka pengguna (UI) di Flutter tersusun dari berbagai widget. Semua widget saling berhubungan seperti pohon keluarga: ada satu widget akar (root) yang memiliki anak (children), dan anak-anak tersebut juga dapat memiliki anak lagi.
-
-**Analogi:** Seperti struktur HTML — `<body>` sebagai induk yang berisi `<div>`, lalu di dalamnya terdapat `<p>` dan `<img>`. Contoh struktur di Flutter:
-`Scaffold -> Padding -> Column -> Row -> InfoCard`.
-
-**Hubungan Parent-Child (Induk-Anak)**
-
-* **Parent (Induk):** Widget yang membungkus atau berisi widget lain. Induk menentukan bagaimana anak-anaknya ditampilkan (misalnya ukuran, tata letak, dan posisi).
-* **Child (Anak):** Widget yang ditempatkan di dalam induk dan memberikan informasi ukuran yang diinginkannya, tetapi tampilan akhir ditentukan oleh induknya.
-
-Contoh: Widget `Column` sebagai induk menata anak-anaknya (`Row`, `SizedBox`, `Center`) secara vertikal.
+### History Tugas
+- [**Tugas 7 - PBP 2025/2026**](https://github.com/mhelmialf/golden-goals-mobile/wiki/Tugas-7-%E2%80%90-PBP-2025-2026)
 
 ---
 
-## 🧾 Daftar Widget yang Digunakan dalam Proyek
+## Tugas 8 - PBP 2025/2026
 
-### Widget Struktur & Halaman
+## 🧭 Perbedaan Antara `Navigator.push()` dan `Navigator.pushReplacement()`
+`Navigator.push()` dan `Navigator.pushReplacement()` adalah dua metode navigasi fundamental di Flutter, namun dengan tujuan yang sangat berbeda.
 
-* **Scaffold:** Kerangka dasar halaman berbasis Material Design, tempat meletakkan `AppBar`, `body`, dan komponen utama lainnya.
-* **AppBar:** Bilah aplikasi di bagian atas layar yang biasanya berisi judul dan tombol aksi.
+1. `Navigator.push()`
+    - Cara Kerja: Metode ini menambahkan rute (halaman) baru ke atas tumpukan navigasi (navigation stack). Halaman sebelumnya tetap ada di dalam tumpukan, di bawah halaman yang baru.
+    - Implikasi: Pengguna dapat menekan tombol "kembali" (baik fisik atau di AppBar) untuk kembali ke halaman sebelumnya.
+    - Contoh Kasus di Golden Goals: Ini adalah metode navigasi yang paling umum digunakan.
+    - Dari Halaman Utama -> klik Create Product -> push() ke Halaman form Create Product.
+    - Dari Halaman Create Product -> klik Home -> push() ke Halaman Utama.
+    - Pengguna dapat dengan mudah kembali dari Home -> Create Product.
 
-### Widget Layout (Tata Letak)
-
-* **Padding:** Memberikan ruang kosong di sekeliling anaknya.
-* **Column:** Menata widget anak secara vertikal.
-* **Row:** Menata widget anak secara horizontal.
-* **SizedBox:** Kotak kosong dengan ukuran tertentu, biasanya digunakan untuk memberi jarak antar widget.
-* **Center:** Menempatkan widget anak tepat di tengah ruang yang tersedia.
-* **GridView:** Menampilkan widget anak dalam bentuk kisi-kisi (grid) yang dapat digulir.
-* **Container:** Kotak serbaguna yang bisa diatur ukuran, padding, margin, dan dekorasinya.
-
-### Widget Tampilan & Interaktif
-
-* **Text:** Menampilkan teks dengan gaya tertentu.
-* **Icon:** Menampilkan ikon dari Material Icons.
-* **Card:** Panel dengan efek bayangan dan sudut membulat.
-* **Material:** Dasar dari elemen bergaya Material Design.
-* **InkWell:** Menambahkan efek responsif sentuhan (ripple effect).
-
-### Widget Fungsional & Lainnya
-
-* **ScaffoldMessenger:** Mengelola tampilan `SnackBar`.
-* **SnackBar:** Pesan sementara di bagian bawah layar.
-* **MediaQuery:** Memberikan informasi tentang ukuran layar perangkat.
-
-### Widget Kustom
-
-* **MyHomePage, InfoCard, ItemCard:** Widget buatan sendiri yang merupakan turunan dari `StatelessWidget`.
+2. `Navigator.pushReplacement()`
+    - Cara Kerja: Metode ini mengganti rute saat ini dengan rute baru. Rute yang lama (halaman saat ini) akan dihapus dari tumpukan navigasi.
+    - Implikasi: Pengguna tidak bisa kembali ke halaman yang baru saja diganti. Tombol "kembali" akan membawa mereka ke halaman sebelum halaman yang diganti.
+    - Contoh Kasus di Golden Goals: Digunakan untuk alur kerja satu arah di mana kembali tidak lagi diinginkan.
+    - Dari Halaman Create Product-> pushReplacement() ke Halaman Utama. (Kita tidak ingin pengguna kembali ke Create Product).
 
 ---
 
-## 🏠 Fungsi Widget MaterialApp
-
-`MaterialApp` adalah widget konfigurasi tingkat atas yang menjadi akar (root) dari aplikasi Flutter berbasis Material Design.
-
-**Fungsinya:**
-
-1. **Theming:** Menyediakan tema global (`ThemeData`) yang dapat diakses seluruh widget.
-2. **Navigation:** Mengatur sistem navigasi antar halaman (`routes`).
-3. **Localization:** Menangani bahasa dan teks default aplikasi.
-
-**Mengapa Harus di Root:**
-Widget seperti `Scaffold`, `AppBar`, dan `Card` bergantung pada konteks yang disediakan oleh `MaterialApp`. Tanpa itu, widget tersebut tidak dapat bekerja dengan baik.
-
-**Analogi:** `MaterialApp` adalah fondasi dan sistem listrik dari rumah — sebelum memasang lampu (`AppBar`) atau perabot (`Scaffold`), fondasi dan sistemnya harus siap terlebih dahulu.
+## 🏗️ Pemanfaatan Hierarchy Widget (Scaffold, AppBar, Drawer)
+Widget Scaffold, AppBar, dan Drawer adalah fondasi untuk menciptakan struktur visual yang konsisten di seluruh aplikasi.
+1. Scaffold: Ini adalah widget "kerangka" utama untuk setiap halaman. Scaffold menyediakan slot-slot standar seperti appBar, body, drawer, dan bottomNavigationBar. Dengan menggunakan Scaffold di setiap halaman, kita memastikan bahwa semua elemen berada di tempat yang seharusnya.
+2. AppBar: AppBar ditempatkan di slot appBar milik Scaffold. Untuk konsistensi:
+Kita bisa membuat widget AppBar kustom (misalnya MyCustomAppBar) yang selalu menampilkan logo toko dan ikon keranjang belanja. Dengan menggunakan AppBar ini di seluruh aplikasi, identitas brand dan akses ke keranjang belanja akan selalu ada di bagian atas, kecuali di halaman-halaman khusus (seperti login).
+3. Drawer: Drawer (menu samping) adalah cara terbaik untuk navigasi utama yang konsisten.
+Kita membuat satu widget Drawer kustom (misalnya MyNavigationDrawer) yang berisi link ke: Halaman Utama, Profil Pengguna, Riwayat Pesanan, Pengaturan, dan Logout. Widget Drawer ini kemudian di-passing ke properti drawer pada Scaffold di semua halaman utama. Hasilnya, tidak peduli pengguna ada di halaman mana, mereka selalu dapat mengakses menu navigasi yang sama persis.
 
 ---
 
-## ⚖️ Perbedaan StatelessWidget dan StatefulWidget
+## 📜 Kelebihan Layout Widget untuk Form (Padding, SingleChildScrollView, ListView)
+Saat merancang form (misalnya untuk registrasi, login, atau checkout), widget layout ini sangat penting untuk fungsionalitas dan User Experience (UX).
+1. Padding
+- Kelebihan: Memberikan "ruang bernapas" (whitespace) di sekitar elemen form. Tanpa Padding, TextField atau tombol akan menempel langsung ke tepi layar atau menempel satu sama lain, membuat UI terlihat sempit, berantakan, dan tidak profesional.
+- Contoh Penggunaan: Membungkus seluruh Column yang berisi TextField (Email, Password) dengan Padding(all: 16.0) agar form tidak menempel di tepi layar.
 
-### StatelessWidget
+2. SingleChildScrollView
+- Kelebihan: Ini adalah widget krusial untuk form. Saat pengguna mengetik di TextField, keyboard virtual akan muncul dan menutupi sebagian layar. Jika form terlalu panjang, SingleChildScrollView memastikan pengguna dapat men-scroll ke bawah untuk melihat dan mengisi semua field. Tanpa ini, pengguna mungkin tidak dapat melihat apa yang mereka ketik atau tidak dapat mengakses tombol "Submit".
+- Contoh Penggunaan: Membungkus Column yang berisi Padding dan semua TextField form checkout (Nama, Alamat, No. HP, Metode Pembayaran) dengan SingleChildScrollView.
 
-* **Definisi:** Widget yang tidak memiliki state (data internal) yang dapat berubah. Semua propertinya bersifat final.
-* **Siklus Hidup:** Hanya menjalankan metode `build()` ketika pertama kali dibuat atau ketika data dari induk berubah.
-* **Analogi:** Seperti poster yang sudah dicetak—kontennya tidak berubah.
-* **Contoh:** `MyHomePage`, `InfoCard`, dan `ItemCard`.
-
-### StatefulWidget
-
-* **Definisi:** Widget yang menyimpan dan mengelola data (state) yang bisa berubah seiring waktu.
-* **Struktur:** Terdiri dari dua class — `StatefulWidget` dan `State`.
-* **Siklus Hidup:** Perubahan data dilakukan dengan `setState()`, yang memicu pembaruan tampilan.
-* **Analogi:** Seperti papan tulis digital yang bisa diubah kapan saja.
-* **Contoh Penggunaan:** Checkbox, slider, form input, atau data yang diperbarui dari API.
+3. ListView
+- Kelebihan: Mirip dengan SingleChildScrollView, ListView juga menyediakan kemampuan scrolling. Kelebihan utamanya muncul jika form bersifat dinamis (misalnya, pengguna bisa menambah banyak alamat pengiriman). Namun, untuk form statis (login/register), ListView juga sering digunakan sebagai pengganti SingleChildScrollView yang dikombinasikan dengan Column.
+- Contoh Penggunaan: Menggunakan ListView untuk membungkus TextField registrasi. Ini secara otomatis memberikan kemampuan scroll dan (jika digunakan dengan benar) bisa lebih efisien dalam me-render elemen.
 
 ---
 
-## 📍 BuildContext
+## 🎨 Menyesuaikan Warna Tema dan Identitas Visual
+Untuk memastikan aplikasi Football Shop memiliki identitas visual yang konsisten, kita memanfaatkan sistem theming bawaan Flutter melalui ThemeData.
+Penetapan Tema Global: Di dalam widget MaterialApp (widget root aplikasi), kita mendefinisikan properti theme.
 
-`BuildContext` adalah objek yang menunjukkan posisi suatu widget di dalam **widget tree**. Setiap widget memiliki `BuildContext` sendiri yang digunakan untuk berinteraksi dengan widget di atasnya (ancestor).
+    ```Dart
+    MaterialApp(
+    title: 'Golden Goals',
+    theme: ThemeData(
+        // Tentukan skema warna utama
+        colorScheme: ColorScheme.fromSeed(
+        seedColor: Colors.green, // Warna utama brand, misal hijau rumput
+        primary: Colors.green[700], // Warna primer untuk tombol
+        secondary: Colors.amber, // Warna aksen untuk diskon/promo
+        surface: Colors.grey[100], // Warna latar belakang halaman
+        ),
 
-**Fungsinya:**
+        // Atur tema khusus untuk AppBar
+        appBarTheme: AppBarTheme(
+        backgroundColor: Colors.green[700], // Samakan dengan warna primer
+        foregroundColor: Colors.white, // Warna teks di AppBar (putih)
+        ),
 
-* Mengakses data dari ancestor widget seperti `Theme`, `MediaQuery`, dan `ScaffoldMessenger`.
-* Diberikan secara otomatis pada metode `build(BuildContext context)`.
+        // Atur tema untuk tombol
+        elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green[700], // Tombol pakai warna primer
+            foregroundColor: Colors.white, // Teks di tombol
+        ),
+        ),
 
-**Analogi:** `BuildContext` adalah alamat rumah sebuah widget. Untuk meminta layanan seperti “antar makanan” (`SnackBar`) atau “warna tema” (`Theme`), widget perlu tahu alamatnya di pohon widget.
-
-**Contoh:**
-
-* `Theme.of(context).colorScheme.primary`
-* `ScaffoldMessenger.of(context).showSnackBar(...)`
-* `MediaQuery.of(context).size.width`
-
----
-
-## ⚡ Perbedaan Hot Reload dan Hot Restart
-
-### Hot Reload
-
-* **Proses:** Menyuntikkan kode baru ke aplikasi yang sedang berjalan tanpa me-restart.
-* **State:** Tidak hilang — posisi dan data pengguna tetap sama.
-* **Analogi:** Mengecat ulang dinding rumah tanpa keluar dari rumah.
-
-### Hot Restart
-
-* **Proses:** Menghentikan dan memulai ulang aplikasi dari awal.
-* **State:** Dihapus sepenuhnya — aplikasi kembali ke halaman awal.
-* **Analogi:** Keluar dari rumah dan masuk lagi dari pintu depan.
-
----
+        // Atur jenis font jika ada
+        fontFamily: 'Poppins', 
+    ),
+    home: HomePage(),
+    );
+    ```
+- Kelebihan: Dengan mendefinisikan tema di satu tempat (ThemeData), semua widget di dalam aplikasi (AppBar, ElevatedButton, FloatingActionButton, dll.) akan secara otomatis mewarisi warna dan gaya ini. Kita tidak perlu lagi mengatur warna AppBar atau tombol secara manual di setiap halaman. Ini menjamin konsistensi total dan sangat memudahkan jika suatu saat brand ingin berganti warna—kita hanya perlu mengubahnya di satu file.
