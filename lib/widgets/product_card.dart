@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:golden_goals/screens/menu.dart';
 import 'package:golden_goals/screens/product_form.dart';
+import 'package:golden_goals/screens/product_entry_list.dart';
+
 
 class ItemCard extends StatelessWidget {
-  // Menampilkan kartu dengan ikon dan nama.
-
   final ItemHomepage item;
 
   const ItemCard(this.item, {super.key});
@@ -12,34 +12,50 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna dari objek 'item'
-      color: item.color,
-      // Membuat sudut kartu melengkung.
+      color: item.color, // Menggunakan warna dari item
       borderRadius: BorderRadius.circular(12),
-
       child: InkWell(
-        // Aksi ketika kartu ditekan.
         onTap: () {
-          // Menampilkan pesan SnackBar saat kartu ditekan.
+          // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
-            
-            if (item.name == "Create Product"){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProductFormPage(),
-                  ));
-            }
+
+          // --- LOGIKA NAVIGASI ---
+          if (item.name == "Create Product") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProductFormPage()),
+            );
+          } 
+          else if (item.name == "All Products") {
+            // Ke List Page dengan filterUserProductsOnly = false (Tampilkan Semua)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductEntryListPage(
+                  filterUserProductsOnly: false,
+                ),
+              ),
+            );
+          } 
+          else if (item.name == "My Products") {
+            // Ke List Page dengan filterUserProductsOnly = true (Filter User Saja)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductEntryListPage(
+                  filterUserProductsOnly: true,
+                ),
+              ),
+            );
+          }
         },
-        // Container untuk menyimpan Icon dan Text
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
             child: Column(
-              // Menyusun ikon dan teks di tengah kartu.
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
