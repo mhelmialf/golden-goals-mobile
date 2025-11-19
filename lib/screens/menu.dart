@@ -11,9 +11,9 @@ class MyHomePage extends StatelessWidget {
 
 // Daftar item untuk ditampilkan di homepage.
   final List<ItemHomepage> items = [
-    ItemHomepage("All Products", Icons.inventory, Colors.blue),
-    ItemHomepage("My Products", Icons.store, Colors.green),
-    ItemHomepage("Create Product", Icons.add, Colors.red),
+    ItemHomepage("All Products", Icons.inventory, const Color.fromARGB(255, 25, 48, 150)),
+    ItemHomepage("My Products", Icons.store, const Color.fromARGB(255, 255, 219, 16)),
+    ItemHomepage("Create Product", Icons.add, const Color.fromARGB(255, 25, 48, 150)),
   ];
 
   @override
@@ -22,15 +22,15 @@ class MyHomePage extends StatelessWidget {
       // AppBar adalah bagian atas halaman yang menampilkan judul.
       appBar: AppBar(
         title: const Text(
-          'Golden Goals',
+          '✨ Golden Goals',
           style: TextStyle(
-            color: Colors.white,
+            color: const Color.fromARGB(255, 255, 219, 16),
             fontWeight: FontWeight.bold,
           ),
         ),
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 25, 48, 150),
+        foregroundColor: const Color.fromARGB(255, 255, 219, 16),
       ),
       drawer: LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
@@ -67,7 +67,8 @@ class MyHomePage extends StatelessWidget {
                       'Welcome to Golden Goals', 
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
+                        fontSize: 20.0,
+                        color: Color.fromARGB(255, 25, 48, 150),
                       ),
                     ),
                   ),

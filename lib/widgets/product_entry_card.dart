@@ -11,6 +11,10 @@ class ProductEntryCard extends StatelessWidget {
     required this.onTap,
   });
 
+  // Warna Utama yang diminta
+  final Color primaryColor = const Color.fromARGB(255, 25, 48, 150); // Biru Tua
+  final Color accentColor = const Color.fromARGB(255, 255, 219, 16); // Kuning Terang
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,11 +22,14 @@ class ProductEntryCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Card(
+          // 1. Latar Belakang Card: Biru Tua
+          color: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(color: Colors.grey.shade300),
+            // Border dibuat warna aksen yang lebih soft
+            side: BorderSide(color: accentColor.withOpacity(0.5)),
           ),
-          elevation: 2,
+          elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -30,28 +37,28 @@ class ProductEntryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 1. Thumbnail
-                // Mengecek apakah thumbnail ada dan tidak kosong
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: (product.thumbnail != null && product.thumbnail!.isNotEmpty)
                       ? Image.network(
-                          // Menggunakan proxy logic seperti kode awal kamu
                           'https://muhammad-helmi41-goldengoals.pbp.cs.ui.ac.id/proxy-image/?url=${Uri.encodeComponent(product.thumbnail!)}',
                           height: 150,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => Container(
                             height: 150,
-                            color: Colors.grey[300],
-                            child: const Center(child: Icon(Icons.broken_image)),
+                            // Placeholder kontras
+                            color: primaryColor.withOpacity(0.8),
+                            child: Center(child: Icon(Icons.broken_image, color: accentColor)),
                           ),
                         )
                       : Container(
                           height: 150,
                           width: double.infinity,
-                          color: Colors.grey[200],
-                          child: const Center(
-                            child: Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
+                          // Placeholder kontras
+                          color: primaryColor.withOpacity(0.8),
+                          child: Center(
+                            child: Icon(Icons.image_not_supported, size: 50, color: accentColor.withOpacity(0.7)),
                           ),
                         ),
                 ),
@@ -60,30 +67,32 @@ class ProductEntryCard extends StatelessWidget {
                 // 2. Name (Product Name)
                 Text(
                   product.productName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
+                    color: accentColor, // Kuning Terang untuk judul
                   ),
                 ),
                 const SizedBox(height: 4),
 
-                // 3. Price (Ditambahkan sesuai request)
+                // 3. Price (Harga)
                 Text(
                   'Rp ${product.price}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16.0,
-                    color: Colors.green,
+                    color: Colors.white, // Putih untuk harga agar kontras tapi tidak terlalu menonjol
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 6),
 
                 // 4. Category
-               Container(
+                Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0, vertical: 4.0),
+                      horizontal: 10.0, vertical: 4.0),
                   decoration: BoxDecoration(
-                    color: Colors.indigo.shade100,
+                    // Latar belakang tag menggunakan warna aksen Kuning
+                    color: accentColor,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Text(
@@ -91,7 +100,8 @@ class ProductEntryCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: Colors.indigo.shade700,
+                      // Teks tag menggunakan warna primer (Biru Tua) agar kontras dari Kuning
+                      color: primaryColor,
                     ),
                   ),
                 ),
@@ -104,20 +114,22 @@ class ProductEntryCard extends StatelessWidget {
                       : product.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.black54),
+                  // Teks deskripsi menggunakan warna putih yang soft
+                  style: const TextStyle(color: Colors.white70),
                 ),
                 const SizedBox(height: 8),
 
                 // 6. Is Featured
                 if (product.isFeatured)
-                  const Row(
+                  Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      SizedBox(width: 4),
+                      Icon(Icons.star, color: accentColor, size: 16),
+                      const SizedBox(width: 4),
                       Text(
                         'Featured Product',
                         style: TextStyle(
-                          color: Colors.amber,
+                          // Kuning Terang untuk status "featured"
+                          color: accentColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),

@@ -37,8 +37,8 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product List'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 25, 48, 150),
+        foregroundColor: const Color.fromARGB(255, 255, 219, 16),
       ),
       drawer: const LeftDrawer(),
       body: Column(
@@ -56,8 +56,8 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _showAllProducts ? Colors.blue : Colors.grey[300],
-                    foregroundColor: _showAllProducts ? Colors.white : Colors.black87,
+                    backgroundColor: _showAllProducts ? const Color.fromARGB(255, 25, 48, 150): Colors.grey[300],
+                    foregroundColor: _showAllProducts ? const Color.fromARGB(255, 255, 219, 16) : Colors.black87,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -75,8 +75,8 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: !_showAllProducts ? Colors.blue : Colors.grey[300],
-                    foregroundColor: !_showAllProducts ? Colors.white : Colors.black87,
+                    backgroundColor: !_showAllProducts ? const Color.fromARGB(255, 25, 48, 150): Colors.grey[300],
+                    foregroundColor: !_showAllProducts ? const Color.fromARGB(255, 255, 219, 16) : Colors.black87,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(20),

@@ -47,6 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
+                      color:  Color.fromARGB(255, 25, 48, 150)
                     ),
                   ),
                   const SizedBox(height: 30.0),
@@ -148,9 +149,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      foregroundColor: const Color.fromARGB(255, 255, 219, 16),
                       minimumSize: Size(double.infinity, 50),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: const Color.fromARGB(255, 25, 48, 150),
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                     ),
                     child: const Text('Register'),

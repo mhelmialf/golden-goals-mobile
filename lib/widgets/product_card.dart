@@ -5,6 +5,8 @@ import 'package:golden_goals/screens/product_entry_list.dart';
 
 
 class ItemCard extends StatelessWidget {
+  // Menampilkan kartu dengan ikon dan nama.
+
   final ItemHomepage item;
 
   const ItemCard(this.item, {super.key});
@@ -12,24 +14,36 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: item.color, // Menggunakan warna dari item
+      // Menggunakan warna dari objek 'item'
+      color: item.color,
+      // Membuat sudut kartu melengkung.
       borderRadius: BorderRadius.circular(12),
+
       child: InkWell(
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
+        // Aksi ketika kartu ditekan.
+        onTap: () async {
+          // Menampilkan pesan SnackBar saat kartu ditekan.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
-
-          // --- LOGIKA NAVIGASI ---
-          if (item.name == "Create Product") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProductFormPage()),
-            );
-          } 
-          else if (item.name == "All Products") {
+            
+            if (item.name == "Create Product"){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductFormPage(),
+                  ));
+            }
+            else if (item.name == "Product List") {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProductEntryListPage()
+                    ),
+                );
+            }
+            else if (item.name == "All Products") {
             // Ke List Page dengan filterUserProductsOnly = false (Tampilkan Semua)
             Navigator.push(
               context,
@@ -52,10 +66,12 @@ class ItemCard extends StatelessWidget {
             );
           }
         },
+        // Container untuk menyimpan Icon dan Text
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
             child: Column(
+              // Menyusun ikon dan teks di tengah kartu.
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(

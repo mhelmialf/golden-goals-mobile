@@ -18,14 +18,18 @@ class LoginApp extends StatelessWidget {
       title: 'Login',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-          .copyWith(secondary: Colors.blueAccent[400]),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 25, 48, 150),
+        ).copyWith(
+          primary: const Color.fromARGB(255, 25, 48, 150),
+          secondary: const Color.fromARGB(255, 255, 219, 16),
+        ),
       ),
       home: const LoginPage(),
     );
   }
 }
-
+              
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -63,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 25, 48, 150),
                     ),
                   ),
                   const SizedBox(height: 30.0),
@@ -149,9 +154,9 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      foregroundColor: const Color.fromARGB(255, 255, 219, 16),
                       minimumSize: Size(double.infinity, 50),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: const Color.fromARGB(255, 25, 48, 150),
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                     ),
                     child: const Text('Login'),
@@ -169,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Don\'t have an account? Register',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: const Color.fromARGB(255, 25, 48, 150),
                         fontSize: 16.0,
                       ),
                     ),

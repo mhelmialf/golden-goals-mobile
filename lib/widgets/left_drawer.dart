@@ -25,17 +25,17 @@ class LeftDrawer extends StatelessWidget {
               children: [
                 const DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: const Color.fromARGB(255, 25, 48, 150),
                   ),
                   child: Column(
                     children: [
                       Text(
-                        'Golden Goals',
+                        '✨ Golden Goals',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 255, 219, 16),
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(10)),
