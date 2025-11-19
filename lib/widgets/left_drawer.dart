@@ -74,7 +74,7 @@ class LeftDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.add_reaction_rounded),
+                  leading: const Icon(Icons.shopping_bag_outlined),
                   title: const Text('Product List'),
                   onTap: () {
                     Navigator.push(
@@ -96,7 +96,7 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Logout'),
             onTap: () async {
               final response = await request.logout(
-                  "http://localhost:8000/auth/logout/"); // Sesuaikan URL
+                  "https://muhammad-helmi41-goldengoals.pbp.cs.ui.ac.id/auth/logout/"); // Sesuaikan URL
               
               String message = response["message"];
 

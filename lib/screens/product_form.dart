@@ -266,6 +266,45 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Product saved successfully!'),
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                        Text('Name: $_name'),
+                                        Text('Price: $_price'),
+                                        Text('Category: $_category'),
+                                        Text('Description: $_description'),
+                                        Text('Thumbnail: $_thumbnail'),
+                                        Text('Is Featured: ${_isFeatured ? "Yes" : "No"}'),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                       setState(() {
+                                          _name = "";
+                                          _price = 0;
+                                          _description = "";
+                                          _category = "";
+                                          _thumbnail = "";
+                                          _isFeatured = false;
+                                        });
+                                      _formKey.currentState!.reset();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                           
                           // TODO: Replace the URL with your app's URL
                           // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
